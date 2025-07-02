@@ -1,0 +1,17 @@
+streamlit
+openai
+python-dotenv
+fpdf
+moviepy
+faster-whisper
+atlassian-python-api
+google-generativeai
+ffmpeg-python
+gunicorn
+python-docx
+sentence-transformers
+SpeechRecognition
+scikit-learn
+bs4
+requests
+flask
