@@ -854,22 +854,6 @@ def feature_3():
                             st.session_state.summary_response = summary_response.text.strip()
                     st.subheader("📝 Page Summary:")
                     st.markdown(st.session_state.summary_response)
-                    st.subheader("✏️ Modify the Code")
-                    alter_instruction = st.text_area("Describe the changes you want to make:")
-                    if st.button("Modify"):
-                        if alter_instruction and cleaned_code:
-                            alteration_prompt = (
-                                f"The following is a piece of code extracted from a Confluence page:\n\n{cleaned_code}\n\n"
-                                f"Please modify this code according to the following instruction:\n'{alter_instruction}'\n\n"
-                                "Return the modified code only. No explanation or extra text."
-                            )
-                            altered_response = ai_model.generate_content(alteration_prompt)
-                            st.session_state.modified_code = strip_code_fences(altered_response.text)
-                            st.success("✅ Modification Completed")
-                    if "modified_code" in st.session_state:
-                        st.subheader("🧪 Modified Code Preview")
-                        st.code(st.session_state.modified_code, language=detected_lang)
-                    st.subheader("🔄 Convert to Another Programming Language")
                     st.subheader("🧠 AI Action")
                     ai_action = st.selectbox(
                         "Select action...",
@@ -898,7 +882,22 @@ def feature_3():
                     if "ai_action_output" in st.session_state:
                         st.subheader(f"📤 Output for: {ai_action}")
                         st.code(st.session_state.ai_action_output, language=detected_lang)
-
+                    st.subheader("✏️ Modify the Code")
+                    alter_instruction = st.text_area("Describe the changes you want to make:")
+                    if st.button("Modify"):
+                        if alter_instruction and cleaned_code:
+                            alteration_prompt = (
+                                f"The following is a piece of code extracted from a Confluence page:\n\n{cleaned_code}\n\n"
+                                f"Please modify this code according to the following instruction:\n'{alter_instruction}'\n\n"
+                                "Return the modified code only. No explanation or extra text."
+                            )
+                            altered_response = ai_model.generate_content(alteration_prompt)
+                            st.session_state.modified_code = strip_code_fences(altered_response.text)
+                            st.success("✅ Modification Completed")
+                    if "modified_code" in st.session_state:
+                        st.subheader("🧪 Modified Code Preview")
+                        st.code(st.session_state.modified_code, language=detected_lang)
+                    st.subheader("🔄 Convert to Another Programming Language")
                     lang_options = [
                                     "Python", "Java", "C#", "JavaScript", "Go", "TypeScript", "C++", "Ruby", "Kotlin",
                                     "Swift", "Rust", "PHP", "Scala", "Perl", "XML", "JSON", "Yang"
